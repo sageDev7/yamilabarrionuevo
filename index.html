@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Lic. Yamila Barrionuevo - Bajá de peso de forma saludable</title>
+  <meta name="description" content="Planes personalizados de nutrición y actividad física. Bajá de peso sin dietas extremas. Turnos online y presenciales. Reservá ahora."/>
+  <link rel="icon" href="./logo.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg:       #f5f9f6;
+      --white:    #ffffff;
+      --green:    #4a8c62;
+      --green-dk: #2e6644;
+      --green-lt: #c8e6d4;
+      --green-xs: #edf7f1;
+      --blue:     #5c9ab8;
+      --gold:     #c4a84a;
+      --dark:     #141a16;
+      --mid:      #3a4a3e;
+      --soft:     #7a8c80;
+      --rule:     rgba(20,26,22,.1);
+      --display:  'Playfair Display', serif;
+      --body:     'Outfit', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: hidden; scroll-behavior: smooth; }
+    body { font-family: var(--body); background: var(--bg); color: var(--dark); overflow-x: hidden; }
+    img  { display: block; max-width: 100%; height: auto; }
+    a    { text-decoration: none; color: inherit; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── BOTONES ── */
+    .btn-wsp {
+      display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      font-family: var(--body); font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: #25D366; color: #fff;
+      padding: 1.1rem 2.4rem; border: none; cursor: pointer;
+      transition: background .25s, transform .2s;
+      box-shadow: 0 4px 20px rgba(37,211,102,.35);
+    }
+    .btn-wsp:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,.45); }
+    .btn-wsp-lg { font-size: .82rem; padding: 1.3rem 3rem; }
+    .btn-green {
+      display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      font-family: var(--body); font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: var(--green-dk); color: #fff;
+      padding: 1.1rem 2.4rem; border: none; cursor: pointer;
+      transition: background .25s, transform .2s;
+    }
+    .btn-green:hover { background: var(--green); transform: translateY(-2px); }
+    .btn-outline-lt {
+      display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      font-family: var(--body); font-size: .7rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: transparent; color: rgba(255,255,255,.75);
+      border: 1.5px solid rgba(255,255,255,.3); padding: 1.05rem 2rem;
+      cursor: pointer; transition: all .25s;
+    }
+    .btn-outline-lt:hover { border-color: rgba(255,255,255,.8); color: #fff; }
+
+    /* ── HEADER STICKY ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 62px; padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(245,249,246,.97);
+      border-bottom: 1px solid var(--rule);
+      backdrop-filter: blur(8px);
+    }
+    .h-brand { display: flex; align-items: center; gap: .7rem; }
+    .h-logo  { height: 32px; }
+    .h-name  { font-family: var(--display); font-size: .95rem; font-weight: 700; color: var(--dark); line-height: 1.1; }
+    .h-name span { font-weight: 400; font-style: italic; font-size: .82em; color: var(--soft); display: block; }
+    .h-nav { display: flex; align-items: center; gap: 2rem; }
+    .h-nav a { font-size: .6rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--soft); transition: color .2s; }
+    .h-nav a:hover { color: var(--green-dk); }
+
+    /* hamburger */
+    #hamburger {
+      display: none;
+      position: fixed; top: 0; right: 5%; height: 62px;
+      flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+      z-index: 10001;
+    }
+    #hamburger span { display: block; width: 20px; height: 1.5px; background: var(--dark); transition: all .3s; transform-origin: center; }
+    #hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    #hamburger.open span:nth-child(2) { opacity: 0; }
+    #hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    #mobile-nav {
+      position: fixed; top: 0; right: 0; width: 75%; max-width: 280px; height: 100vh;
+      background: var(--white); border-left: 1px solid var(--rule); z-index: 9998;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: 0 2.5rem; gap: 1.8rem;
+      transform: translateX(100%); transition: transform .38s cubic-bezier(.77,0,.175,1);
+    }
+    #mobile-nav.open { transform: none; }
+    #mobile-nav a { font-size: .82rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--mid); transition: color .2s; }
+    #mobile-nav a:hover { color: var(--green-dk); }
+    .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.25); z-index: 9997; }
+    .nav-overlay.open { display: block; }
+
+    /* ══════════════════════════════════════
+       HERO — imagen full, copy de impacto
+    ══════════════════════════════════════ */
+    #hero {
+      min-height: 100vh; position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1543362906-acfc16c67564?w=1920&q=95');
+      background-size: cover; background-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(110deg,
+        rgba(20,26,22,.92) 0%,
+        rgba(46,102,68,.82) 45%,
+        rgba(20,26,22,.70) 100%
+      );
+    }
+    .hero-texture {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 860px;
+      margin: 0 auto;
+      padding: 140px 5% 100px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+    }
+    /* Pill de credencial arriba */
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      backdrop-filter: blur(4px);
+      padding: .45rem 1rem; margin-bottom: 1.8rem;
+      font-size: .58rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(255,255,255,.8);
+    }
+    .hero-pill i { color: var(--gold); font-size: .65rem; }
+    /* Headline principal — grande y directa */
+    .hero-h1 {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900; line-height: .9;
+      letter-spacing: -.02em; color: #fff;
+      margin-bottom: 1rem;
+    }
+    .hero-h1 em {
+      font-style: italic; font-weight: 400;
+      color: var(--green-lt); display: block;
+    }
+    /* Subtítulo — el "por qué yo" */
+    .hero-sub {
+      font-size: 1rem; font-weight: 300; line-height: 1.75;
+      color: rgba(255,255,255,.6); max-width: 540px;
+      margin: 1.6rem 0 2.4rem; text-align: center;
+    }
+    .hero-sub strong { color: rgba(255,255,255,.88); font-weight: 600; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center; }
+    /* Social proof inline */
+    .hero-proof {
+      margin-top: 2.8rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+      justify-content: center; width: 100%;
+    }
+    .proof-item {
+      display: flex; flex-direction: column; gap: .18rem;
+    }
+    .proof-num {
+      font-family: var(--display); font-size: 1.8rem; font-weight: 700;
+      color: #fff; line-height: 1;
+    }
+    .proof-label {
+      font-size: .58rem; font-weight: 500; letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(255,255,255,.4);
+    }
+    .proof-sep { width: 1px; height: 36px; background: rgba(255,255,255,.12); }
+
+    /* ══════════════════════════════════════
+       PAIN POINTS — ¿Te identificás?
+    ══════════════════════════════════════ */
+    #pain {
+      padding: 80px 5%;
+      background: var(--dark);
+      position: relative; overflow: hidden;
+    }
+    #pain::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(135deg,
+        rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px,
+        transparent 1px, transparent 24px);
+      pointer-events: none;
+    }
+    .pain-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .pain-top { text-align: center; margin-bottom: 3rem; }
+    .pain-eyebrow {
+      font-size: .6rem; font-weight: 600; letter-spacing: .36em;
+      text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .8rem;
+    }
+    .pain-h2 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700; color: #fff; line-height: 1.05;
+    }
+    .pain-h2 em { font-style: italic; font-weight: 400; color: rgba(255,255,255,.55); }
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,.06); }
+    .pain-item {
+      background: rgba(255,255,255,.03);
+      padding: 2rem 1.8rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: background .2s;
+    }
+    .pain-item:hover { background: rgba(255,255,255,.07); }
+    .pain-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: rgba(255,255,255,.06); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; color: rgba(255,255,255,.4);
+    }
+    .pain-text { font-size: .85rem; font-weight: 300; color: rgba(255,255,255,.55); line-height: 1.7; }
+    .pain-text strong { color: rgba(255,255,255,.82); font-weight: 600; display: block; margin-bottom: .25rem; font-size: .9rem; }
+    /* CTA al pie de pain */
+    .pain-cta { text-align: center; margin-top: 3rem; }
+    .pain-cta p { font-size: .82rem; font-weight: 300; color: rgba(255,255,255,.38); margin-bottom: 1.2rem; }
+
+    /* ══════════════════════════════════════
+       SOLUCIÓN — qué obtenés
+    ══════════════════════════════════════ */
+    #solucion {
+      padding: 100px 5%;
+      background: var(--white);
+      position: relative; overflow: hidden;
+    }
+    #solucion::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 0% 50%, rgba(74,140,98,.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 100% 50%, rgba(92,154,184,.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .solucion-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .solucion-top { text-align: center; margin-bottom: 3.5rem; }
+    .solucion-eyebrow {
+      font-size: .6rem; font-weight: 600; letter-spacing: .36em;
+      text-transform: uppercase; color: var(--green); display: block; margin-bottom: .8rem;
+    }
+    .solucion-h2 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700; color: var(--dark); line-height: 1.05;
+    }
+    .solucion-h2 em { font-style: italic; font-weight: 400; color: var(--green); }
+    .solucion-sub { font-size: .88rem; font-weight: 300; color: var(--soft); margin-top: .8rem; }
+    /* Cards de servicio — con precio implícito y CTA propio */
+    .solucion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--rule); }
+    .serv-card {
+      background: var(--white);
+      padding: 2.4rem 2rem;
+      display: flex; flex-direction: column; gap: .8rem;
+      position: relative; overflow: hidden;
+      transition: box-shadow .25s;
+    }
+    .serv-card:hover { box-shadow: 0 8px 40px rgba(20,26,22,.1); z-index: 1; }
+    .serv-card.featured {
+      background: var(--green-dk);
+    }
+    .serv-card.featured::before {
+      content: '★  MÁS ELEGIDO';
+      position: absolute; top: 0; left: 0; right: 0;
+      background: var(--gold); color: var(--dark);
+      font-size: .5rem; font-weight: 700; letter-spacing: .28em;
+      text-align: center; padding: .4rem;
+    }
+    .serv-card.featured { padding-top: 3rem; }
+    .serv-icon-wrap {
+      width: 46px; height: 46px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--green-xs); margin-bottom: .4rem;
+    }
+    .serv-icon-wrap i { font-size: 1.1rem; color: var(--green-dk); }
+    .serv-card.featured .serv-icon-wrap { background: rgba(255,255,255,.15); }
+    .serv-card.featured .serv-icon-wrap i { color: var(--green-lt); }
+    .serv-name {
+      font-family: var(--display); font-size: 1.5rem; font-weight: 700;
+      color: var(--dark); line-height: 1.05;
+    }
+    .serv-card.featured .serv-name { color: #fff; }
+    .serv-desc {
+      font-size: .82rem; font-weight: 300; line-height: 1.8;
+      color: var(--soft); flex: 1;
+    }
+    .serv-card.featured .serv-desc { color: rgba(255,255,255,.6); }
+    .serv-list { display: flex; flex-direction: column; gap: .5rem; margin: .4rem 0; }
+    .serv-li {
+      display: flex; align-items: flex-start; gap: .65rem;
+      font-size: .78rem; font-weight: 400; color: var(--mid);
+    }
+    .serv-card.featured .serv-li { color: rgba(255,255,255,.75); }
+    .serv-li i { font-size: .5rem; color: var(--green); margin-top: .28rem; flex-shrink: 0; }
+    .serv-card.featured .serv-li i { color: var(--green-lt); }
+    .serv-cta {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .62rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--green-dk);
+      margin-top: .5rem; cursor: pointer;
+      transition: gap .2s;
+    }
+    .serv-cta:hover { gap: .8rem; }
+    .serv-card.featured .serv-cta { color: var(--green-lt); }
+
+    /* ══════════════════════════════════════
+       QUIÉN SOY — bloque de confianza
+    ══════════════════════════════════════ */
+    #quien {
+      padding: 100px 5%;
+      position: relative; overflow: hidden;
+      background: var(--dark);
+    }
+    #quien::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=1920&q=80');
+      background-size: cover; background-position: center 30%;
+      filter: grayscale(20%) brightness(.08);
+    }
+    .quien-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    /* Foto con marco */
+    .quien-img-wrap { position: relative; }
+    .quien-img-frame {
+      overflow: hidden; aspect-ratio: 4/5;
+      clip-path: polygon(0 0, 100% 0, 100% 92%, 94% 100%, 0 100%);
+    }
+    .quien-img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center top;
+      filter: brightness(.95);
+      transition: transform .7s ease;
+    }
+    .quien-img-wrap:hover .quien-img { transform: scale(1.03); }
+    /* Badge de matrícula */
+    .quien-badge {
+      position: absolute; bottom: 28px; right: -16px;
+      background: var(--gold); color: var(--dark);
+      padding: 1rem 1.5rem; text-align: center;
+    }
+    .quien-badge-num { font-family: var(--display); font-size: 1.6rem; font-weight: 900; line-height: 1; }
+    .quien-badge-label { font-size: .48rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; margin-top: .2rem; }
+    /* Texto */
+    .quien-text { display: flex; flex-direction: column; gap: 0; }
+    .quien-eyebrow { font-size: .6rem; font-weight: 600; letter-spacing: .36em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: block; }
+    .quien-h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700; color: #fff; line-height: .95; margin-bottom: 1.4rem;
+    }
+    .quien-h2 em { font-style: italic; font-weight: 400; color: var(--green-lt); }
+    .quien-p { font-size: .86rem; font-weight: 300; line-height: 1.9; color: rgba(255,255,255,.5); margin-bottom: .8rem; }
+    .quien-p strong { color: rgba(255,255,255,.85); font-weight: 600; }
+    /* Títulos como chips */
+    .quien-btn { align-self: flex-start; }
+    .quien-titulo {
+      background: rgba(255,255,255,.03);
+      padding: .85rem 1.1rem;
+      display: flex; align-items: center; gap: .85rem;
+      transition: background .2s;
+    }
+    .quien-titulo:hover { background: rgba(255,255,255,.07); }
+    .titulo-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .titulo-dot.g  { background: var(--green); }
+    .titulo-dot.b  { background: var(--blue); }
+    .titulo-dot.gd { background: var(--gold); }
+    .titulo-dot.gl { background: var(--green-lt); }
+    .titulo-name { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.82); }
+    .titulo-inst { font-size: .68rem; font-weight: 300; color: rgba(255,255,255,.38); }
+
+    /* ══════════════════════════════════════
+       PLAN 21 DÍAS — producto digital destacado
+    ══════════════════════════════════════ */
+    #plan21 {
+      padding: 100px 5%;
+      background: var(--bg);
+      position: relative; overflow: hidden;
+    }
+    #plan21::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(74,140,98,.1) 1.5px, transparent 1.5px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .plan21-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    /* Visual */
+    .plan21-visual {
+      background: linear-gradient(140deg, var(--green-dk) 0%, var(--blue) 100%);
+      padding: 3.5rem 3rem;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .plan21-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,.06) 1.5px, transparent 1.5px);
+      background-size: 22px 22px;
+    }
+    .plan21-num-bg {
+      font-family: var(--display); font-size: 12rem;
+      font-weight: 900; color: rgba(255,255,255,.07);
+      line-height: .85; position: absolute; bottom: -1rem; right: -1rem;
+      user-select: none; letter-spacing: -.04em;
+    }
+    .plan21-tag {
+      position: relative; z-index: 1;
+      background: var(--gold); color: var(--dark);
+      font-size: .5rem; font-weight: 700; letter-spacing: .28em;
+      text-transform: uppercase; padding: .35rem .9rem; margin-bottom: 1.5rem;
+      align-self: center;
+    }
+    .plan21-titulo {
+      position: relative; z-index: 1;
+      font-family: var(--display); font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900; color: #fff; line-height: .9; margin-bottom: .6rem;
+    }
+    .plan21-titulo em { font-style: italic; font-weight: 400; color: var(--green-lt); display: block; font-size: .7em; }
+    .plan21-sub {
+      position: relative; z-index: 1;
+      font-size: .62rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 2rem;
+    }
+    .plan21-pdf {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      padding: .65rem 1.3rem;
+      font-size: .58rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: rgba(255,255,255,.7);
+    }
+    /* Texto */
+    .plan21-text { display: flex; flex-direction: column; }
+    .plan21-eyebrow { font-size: .6rem; font-weight: 600; letter-spacing: .36em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; display: block; }
+    .plan21-h2 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700; color: var(--dark); line-height: 1; margin-bottom: 1rem;
+    }
+    .plan21-h2 em { font-style: italic; font-weight: 400; color: var(--green); }
+    .plan21-p { font-size: .86rem; font-weight: 300; line-height: 1.9; color: var(--soft); margin-bottom: 1.6rem; }
+    .plan21-lista { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 2rem; }
+    .plan21-li {
+      display: flex; align-items: flex-start; gap: .7rem;
+      font-size: .82rem; color: var(--mid);
+    }
+    .plan21-li i { color: var(--green); font-size: .5rem; margin-top: .3rem; flex-shrink: 0; }
+    .plan21-ctas { display: flex; gap: .8rem; flex-wrap: wrap; }
+
+    /* ══════════════════════════════════════
+       CÓMO FUNCIONA — proceso simple
+    ══════════════════════════════════════ */
+    #proceso {
+      padding: 100px 5%;
+      background: var(--white);
+      position: relative; overflow: hidden;
+    }
+    #proceso::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 50% 100%, rgba(74,140,98,.06) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .proceso-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+    .proceso-head { text-align: center; margin-bottom: 4rem; }
+    .proceso-eyebrow { font-size: .6rem; font-weight: 600; letter-spacing: .36em; text-transform: uppercase; color: var(--green); display: block; margin-bottom: .8rem; }
+    .proceso-h2 {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; color: var(--dark); line-height: 1.05;
+    }
+    .proceso-h2 em { font-style: italic; color: var(--green); font-weight: 400; }
+    .proceso-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+    /* Línea conectora */
+    .proceso-steps::before {
+      content: ''; position: absolute;
+      top: 28px; left: calc(12.5% + 12px); right: calc(12.5% + 12px); height: 2px;
+      background: var(--green-lt);
+    }
+    .paso {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 0 1.2rem;
+    }
+    .paso-circle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--green-dk); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-size: 1.3rem; font-weight: 700;
+      margin-bottom: 1.4rem; position: relative; z-index: 1;
+      flex-shrink: 0; box-shadow: 0 4px 16px rgba(46,102,68,.35);
+    }
+    .paso-h3 { font-size: .85rem; font-weight: 700; color: var(--dark); margin-bottom: .4rem; line-height: 1.2; }
+    .paso-p  { font-size: .75rem; font-weight: 300; line-height: 1.75; color: var(--soft); }
+    /* CTA del proceso */
+    .proceso-cta { text-align: center; margin-top: 3.5rem; }
+    .proceso-cta p { font-size: .82rem; color: var(--soft); margin-bottom: 1.2rem; }
+
+    /* ══════════════════════════════════════
+       FORMULARIO — conversión final
+    ══════════════════════════════════════ */
+    #contacto {
+      padding: 100px 5%;
+      position: relative; overflow: hidden;
+    }
+    #contacto::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1920&q=85');
+      background-size: cover; background-position: center;
+      filter: grayscale(10%) brightness(.38) saturate(.9);
+    }
+    #contacto::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(120deg, rgba(46,102,68,.72) 0%, rgba(20,26,22,.68) 100%);
+    }
+    .contacto-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+      align-items: start; position: relative; z-index: 1;
+    }
+    .ct-left { display: flex; flex-direction: column; }
+    .ct-eyebrow { font-size: .6rem; font-weight: 600; letter-spacing: .36em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: block; }
+    .ct-h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 700; color: #fff; line-height: .95; margin-bottom: 1.4rem;
+    }
+    .ct-h2 em { font-style: italic; font-weight: 400; color: var(--green-lt); }
+    .ct-p { font-size: .86rem; font-weight: 300; line-height: 1.9; color: rgba(255,255,255,.5); margin-bottom: 2.2rem; }
+    /* Datos de contacto */
+    .ct-datos { display: flex; flex-direction: column; gap: 1px; background: rgba(255,255,255,.07); margin-bottom: 2.4rem; }
+    .ct-dato {
+      background: rgba(255,255,255,.04); padding: 1rem 1.2rem;
+      display: flex; align-items: center; gap: 1rem; transition: background .2s;
+    }
+    .ct-dato:hover { background: rgba(255,255,255,.08); }
+    a.ct-dato:hover .ct-dato-val { color: #fff; }
+    a.f-contact-row:hover span { color: var(--green-lt); }
+    a.f-contact-row:hover i { color: #fff; }
+    .ct-dato-ico {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; flex-shrink: 0;
+    }
+    .ct-dato-ico.g  { background: rgba(74,140,98,.25); color: var(--green-lt); }
+    .ct-dato-ico.b  { background: rgba(92,154,184,.2);  color: #90d4f5; }
+    .ct-dato-ico.wsp{ background: rgba(37,211,102,.2);  color: #4ae882; }
+    .ct-dato-body { display: flex; flex-direction: column; gap: .05rem; }
+    .ct-dato-lbl { font-size: .5rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+    .ct-dato-val { font-size: .84rem; font-weight: 400; color: rgba(255,255,255,.8); }
+    /* Formulario */
+    .ct-form {
+      background: var(--white);
+      padding: 2.8rem;
+      border-top: 4px solid var(--green);
+      box-shadow: 0 16px 60px rgba(0,0,0,.3);
+    }
+    .form-title { font-family: var(--display); font-size: 1.7rem; font-weight: 700; color: var(--dark); margin-bottom: .3rem; }
+    .form-sub   { font-size: .74rem; font-weight: 300; color: var(--soft); margin-bottom: 1.8rem; }
+    .form-body  { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .35rem; }
+    .form-group label { font-size: .52rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--mid); }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--bg); border: 1.5px solid transparent;
+      border-bottom-color: var(--rule);
+      color: var(--dark); font-family: var(--body); font-size: .84rem; font-weight: 400;
+      padding: .8rem .9rem; outline: none; transition: border-color .2s; width: 100%;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(122,140,128,.4); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--green); background: var(--white);
+    }
+    .form-group select { appearance: none; cursor: pointer; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-note { font-size: .63rem; font-weight: 300; color: var(--soft); display: flex; align-items: center; gap: .45rem; }
+    .form-note i { color: #25D366; }
+    .btn-form { width: 100%; padding: 1.15rem; font-size: .72rem; }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer { background: var(--dark); padding: 56px 5% 24px; border-top: 1px solid rgba(255,255,255,.05); }
+    .f-inner { max-width: 1100px; margin: 0 auto; }
+    .f-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; padding-bottom: 48px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,.07); }
+    .f-brand-row { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+    .f-logo { height: 38px; }
+    .f-name { font-family: var(--display); font-size: 1rem; font-weight: 700; color: rgba(255,255,255,.75); line-height: 1.2; }
+    .f-name span { font-weight: 400; font-style: italic; font-size: .88em; color: rgba(255,255,255,.4); display: block; }
+    .f-desc { font-size: .74rem; font-weight: 300; color: rgba(255,255,255,.35); line-height: 1.85; max-width: 240px; }
+    .f-col-t { font-size: .52rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 1.1rem; display: block; }
+    .f-links { display: flex; flex-direction: column; gap: .6rem; }
+    .f-links a { font-size: .74rem; font-weight: 300; color: rgba(255,255,255,.38); transition: color .2s; }
+    .f-links a:hover { color: var(--green-lt); }
+    .f-contact-list { display: flex; flex-direction: column; gap: .8rem; }
+    .f-contact-row { display: flex; align-items: center; gap: .65rem; }
+    .f-contact-row i { font-size: .6rem; color: var(--green-lt); flex-shrink: 0; width: 12px; }
+    .f-contact-row span { font-size: .74rem; font-weight: 300; color: rgba(255,255,255,.38); }
+    .f-bot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .4rem; align-items: center; }
+    .f-bot p { font-size: .56rem; color: rgba(255,255,255,.24); }
+    .f-bot a { color: rgba(255,255,255,.36); transition: color .2s; }
+    .f-bot a:hover { color: var(--green-lt); }
+
+    /* WA flotante */
+    .wa { position: fixed; bottom: 22px; right: 22px; z-index: 888; width: 54px; height: 54px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.4rem; box-shadow: 0 4px 20px rgba(37,211,102,.4); transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+    .wa:hover { transform: scale(1.1); }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .quien-inner, .plan21-inner, .contacto-inner { gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      .h-nav, .h-btn-desktop { display: none; }
+      #hamburger { display: flex; }
+      header { justify-content: center; }
+      .h-brand { margin: 0 auto; }
+
+      /* Hero */
+      .hero-inner { padding: 100px 6% 80px; }
+      .hero-proof { gap: 1.5rem; justify-content: center; }
+      .proof-sep  { display: none; }
+      .proof-item { align-items: center; text-align: center; }
+
+      /* Pain */
+      #pain { padding: 64px 5%; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .pain-item { text-align: center; flex-direction: column; align-items: center; }
+
+      /* Solución */
+      #solucion { padding: 72px 5%; }
+      .solucion-grid { grid-template-columns: 1fr; }
+      .serv-card { text-align: center; align-items: center; }
+      .serv-li { justify-content: center; }
+      .serv-cta { justify-content: center; }
+
+      /* Quién */
+      #quien { padding: 72px 5%; }
+      .quien-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .quien-img-frame { aspect-ratio: 16/9; clip-path: none; }
+      .quien-badge { right: 1rem; }
+      .quien-text { text-align: center; align-items: center; }
+      .quien-eyebrow { text-align: center; }
+      .quien-titulo { justify-content: center; }
+      .quien-titulo > div:last-child { text-align: center; }
+      .quien-text .btn-wsp { align-self: center; }
+      .quien-btn { align-self: center; }
+
+      /* Plan 21 */
+      #plan21 { padding: 72px 5%; }
+      .plan21-inner { grid-template-columns: 1fr; gap: 2.8rem; }
+      .plan21-visual { padding: 2.8rem 2rem; }
+      .plan21-text { text-align: center; align-items: center; }
+      .plan21-eyebrow { text-align: center; }
+      .plan21-lista { align-items: center; }
+      .plan21-li { justify-content: center; }
+      .plan21-ctas { justify-content: center; }
+
+      /* Proceso */
+      #proceso { padding: 72px 5%; }
+      .proceso-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .proceso-steps::before { display: none; }
+      .paso { align-items: flex-start; text-align: left; flex-direction: row; gap: 1rem; }
+      .paso > div:last-child { text-align: center; flex: 1; }
+      .paso-circle { margin-bottom: 0; flex-shrink: 0; width: 44px; height: 44px; font-size: 1.1rem; }
+
+      /* Contacto */
+      #contacto { padding: 72px 5%; }
+      .contacto-inner { grid-template-columns: 1fr; gap: 2.8rem; }
+      .ct-left { text-align: center; align-items: center; }
+      .ct-eyebrow { text-align: center; }
+      .ct-dato { justify-content: flex-start; }
+      .ct-dato-body { text-align: center; flex: 1; }
+      .form-row { grid-template-columns: 1fr; }
+      .ct-form { padding: 2rem 1.4rem; }
+
+      /* Footer */
+      .f-top { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+      .f-brand-row { justify-content: center; }
+      .f-desc { max-width: none; margin: 0 auto; }
+      .f-col { display: flex; flex-direction: column; align-items: center; }
+      .f-contact-row { justify-content: center; }
+      .f-bot { flex-direction: column; align-items: center; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; align-items: center; width: 100%; }
+      .btn-wsp, .btn-green, .btn-outline-lt { width: 100%; max-width: 320px; justify-content: center; }
+      .proceso-steps { grid-template-columns: 1fr; }
+      .pain-cta .btn-wsp, .proceso-cta .btn-wsp { width: 100%; max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="h-brand">
+    <img src="./logo.png" alt="Yamila Barrionuevo" class="h-logo"/>
+    <div class="h-name">Yamila Barrionuevo<span>Nutrición & Act. Física</span></div>
+  </div>
+  <nav class="h-nav">
+    <a href="#solucion">Servicios</a>
+    <a href="#plan21">Plan 21 días</a>
+    <a href="#quien">Sobre mí</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20consultar" target="_blank"
+     class="btn-wsp h-btn-desktop" style="font-size:.58rem;padding:.55rem 1.2rem;box-shadow:none;">
+    <i class="fa-brands fa-whatsapp"></i> Reservar turno
+  </a>
+</header>
+<button id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+<div class="nav-overlay" id="nav-overlay"></div>
+<nav id="mobile-nav">
+  <a href="#solucion">Servicios</a>
+  <a href="#plan21">Plan 21 días</a>
+  <a href="#quien">Sobre mí</a>
+  <a href="#contacto">Contacto</a>
+  <a href="https://wa.me/5493534116164" target="_blank" style="color:var(--green-dk);font-weight:700">
+    <i class="fa-brands fa-whatsapp"></i> Reservar turno
+  </a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-inner">
+    <div class="hero-pill">
+      <i class="fa-solid fa-certificate"></i>
+      Lic. en Nutrición · Lic. en Ed. Física · M.P. 4702
+    </div>
+    <h1 class="hero-h1">
+      Bajá de peso.<br/>
+      <em>Sin dietas extremas.</em>
+    </h1>
+    <p class="hero-sub">
+      Planes <strong>100% personalizados</strong> de nutrición y actividad física para que alcances tu peso ideal y lo mantengas. <strong>Presencial y online.</strong>
+    </p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20empezar%20con%20mi%20plan" target="_blank" class="btn-wsp btn-wsp-lg">
+        <i class="fa-brands fa-whatsapp"></i> Quiero empezar ahora
+      </a>
+      <a href="#solucion" class="btn-outline-lt">Ver mis planes</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <div class="proof-num">100%</div>
+        <div class="proof-label">Personalizado</div>
+      </div>
+      <div class="proof-sep"></div>
+      <div class="proof-item">
+        <div class="proof-num">2</div>
+        <div class="proof-label">Licenciaturas</div>
+      </div>
+      <div class="proof-sep"></div>
+      <div class="proof-item">
+        <div class="proof-num">Online</div>
+        <div class="proof-label">y presencial</div>
+      </div>
+      <div class="proof-sep"></div>
+      <div class="proof-item">
+        <div class="proof-num">WhatsApp</div>
+        <div class="proof-label">seguimiento directo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PAIN POINTS ══ -->
+<section id="pain">
+  <div class="pain-inner">
+    <div class="pain-top reveal">
+      <span class="pain-eyebrow">¿Te identificás?</span>
+      <h2 class="pain-h2">Si llegaste hasta acá,<br/><em>es porque algo no está funcionando</em></h2>
+    </div>
+    <div class="pain-grid reveal" style="transition-delay:.1s">
+      <div class="pain-item">
+        <div class="pain-icon"><i class="fa-solid fa-rotate"></i></div>
+        <div class="pain-text"><strong>Empezás y abandonás</strong>Probaste mil dietas, bajaste algo y después recuperaste todo. Ya no sabés por dónde empezar.</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon"><i class="fa-solid fa-utensils"></i></div>
+        <div class="pain-text"><strong>No sabés qué comer</strong>Hay demasiada información contradictoria. Lo que le funciona a otro no te funciona a vos.</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon"><i class="fa-solid fa-clock"></i></div>
+        <div class="pain-text"><strong>No tenés tiempo ni energía</strong>Querés comer mejor y moverte más, pero el día a día no te lo permite.</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon"><i class="fa-solid fa-person-running"></i></div>
+        <div class="pain-text"><strong>Hacés ejercicio y no ves resultados</strong>Te movés pero no cambia nada. La alimentación y el movimiento tienen que ir juntos.</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
+        <div class="pain-text"><strong>Te pesa la balanza, no el proceso</strong>Querés resultados rápidos pero los métodos extremos te dejan peor que antes.</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon"><i class="fa-solid fa-user-doctor"></i></div>
+        <div class="pain-text"><strong>No tenés acompañamiento real</strong>Seguir un plan solo es difícil. Necesitás a alguien que te guíe y responda tus dudas.</div>
+      </div>
+    </div>
+    <div class="pain-cta reveal">
+      <p>Si te sentiste identificado/a en al menos uno, tengo el plan para vos.</p>
+      <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20empezar%20con%20mi%20plan" target="_blank" class="btn-wsp">
+        <i class="fa-brands fa-whatsapp"></i> Hablemos, sin compromiso
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOLUCIÓN / SERVICIOS ══ -->
+<section id="solucion">
+  <div class="solucion-inner">
+    <div class="solucion-top reveal">
+      <span class="solucion-eyebrow">Mis planes</span>
+      <h2 class="solucion-h2">Hay un plan pensado<br/><em>exactamente para vos</em></h2>
+      <p class="solucion-sub">Cada plan se diseña desde cero. No hay plantillas, no hay atajos, no hay dos planes iguales.</p>
+    </div>
+    <div class="solucion-grid reveal" style="transition-delay:.1s">
+
+      <div class="serv-card">
+      <div class="serv-icon-wrap"><i class="fa-solid fa-leaf"></i></div>
+        <div class="serv-name">Plan Nutricional</div>
+        <p class="serv-desc">Alimentación saludable y sostenible, adaptada a tu vida real: tus gustos, tu horario y tus objetivos.</p>
+        <div class="serv-list">
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Entrevista inicial personalizada</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Plan semana a semana</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Guía nutricional + recetarios</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Seguimiento por WhatsApp</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Presencial u online</div>
+        </div>
+        <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20el%20Plan%20Nutricional" target="_blank" class="serv-cta">
+          Consultar precio <i class="fa-solid fa-arrow-right" style="font-size:.5rem"></i>
+        </a>
+      </div>
+
+      <div class="serv-card featured">
+      <div class="serv-icon-wrap"><i class="fa-solid fa-fire"></i></div>
+        <div class="serv-name">Plan Descenso de Peso</div>
+        <p class="serv-desc">El plan integral para bajar de peso de forma real y sostenible. Nutrición + movimiento trabajando juntos.</p>
+        <div class="serv-list">
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Valoración del estado nutricional</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Plan personalizado de descenso</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Guía nutricional + recetarios</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Rutina de actividad física incluida</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Acompañamiento integral</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Seguimiento por WhatsApp</div>
+        </div>
+        <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20el%20Plan%20Descenso%20de%20Peso" target="_blank" class="serv-cta">
+          Consultar precio <i class="fa-solid fa-arrow-right" style="font-size:.5rem"></i>
+        </a>
+      </div>
+
+      <div class="serv-card">
+      <div class="serv-icon-wrap"><i class="fa-solid fa-dumbbell"></i></div>
+        <div class="serv-name">Plan Actividad Física</div>
+        <p class="serv-desc">Rutina personalizada según tu nivel y disponibilidad. Solo, combinado con nutrición, los resultados se potencian.</p>
+        <div class="serv-list">
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Evaluación de condición física</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Rutina personalizada</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Progresión semana a semana</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Combinable con plan nutricional</div>
+          <div class="serv-li"><i class="fa-solid fa-check"></i>Seguimiento continuo</div>
+        </div>
+        <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20el%20Plan%20de%20Actividad%20F%C3%ADsica" target="_blank" class="serv-cta">
+          Consultar precio <i class="fa-solid fa-arrow-right" style="font-size:.5rem"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUIÉN SOY ══ -->
+<section id="quien">
+  <div class="quien-inner">
+    <div class="quien-img-wrap reveal">
+      <div class="quien-img-frame">
+        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=900&q=92" alt="Lic. Yamila Barrionuevo" class="quien-img"/>
+      </div>
+      <div class="quien-badge">
+        <div class="quien-badge-num">M.P.</div>
+        <div class="quien-badge-label">4702</div>
+      </div>
+    </div>
+    <div class="quien-text reveal" style="transition-delay:.12s">
+      <span class="quien-eyebrow">¿Por qué yo?</span>
+      <h2 class="quien-h2">No soy solo una<br/><em>nutricionista más</em></h2>
+      <p class="quien-p">Soy <strong>Yamila Barrionuevo</strong>, y tengo algo que pocos profesionales de la salud pueden decir: soy licenciada en Nutrición <em>y</em> en Educación Física.</p>
+      <p class="quien-p">Eso significa que cuando diseño tu plan, entiendo los dos lados: <strong>lo que comés y cómo te movés.</strong> No te doy una dieta genérica, te doy un sistema completo.</p>
+      <div class="quien-titulos">
+        <div class="quien-titulo">
+          <div class="titulo-dot g"></div>
+          <div>
+            <div class="titulo-name">Lic. en Nutrición — UNC</div>
+            <div class="titulo-inst">Universidad Nacional de Córdoba</div>
+          </div>
+        </div>
+        <div class="quien-titulo">
+          <div class="titulo-dot b"></div>
+          <div>
+            <div class="titulo-name">Lic. en Educación Física — UNVM</div>
+            <div class="titulo-inst">Universidad Nacional de Villa María</div>
+          </div>
+        </div>
+        <div class="quien-titulo">
+          <div class="titulo-dot gd"></div>
+          <div>
+            <div class="titulo-name">Mgter. en Actividad Física y Salud</div>
+            <div class="titulo-inst">Matrícula Profesional 4702</div>
+          </div>
+        </div>
+        <div class="quien-titulo">
+          <div class="titulo-dot gl"></div>
+          <div>
+            <div class="titulo-name">Técnica en Periodismo Deportivo</div>
+            <a href="https://www.instagram.com/licnutri_yamibarrionuevo/" target="_blank" class="titulo-inst" style="color:inherit;">@licnutri_yamibarrionuevo</a>
+          </div>
+        </div>
+      </div>
+      <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20empezar%20con%20mi%20plan" target="_blank" class="btn-wsp quien-btn">
+        <i class="fa-brands fa-whatsapp"></i> Empezar con mi plan
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PLAN 21 DÍAS ══ -->
+<section id="plan21">
+  <div class="plan21-inner">
+    <div class="plan21-visual reveal">
+      <div class="plan21-tag">★  Producto digital</div>
+      <div class="plan21-titulo">21 días<br/><em>de hábitos</em></div>
+      <div class="plan21-sub">Nutrición · Movimiento · Cambio real</div>
+      <div class="plan21-pdf"><i class="fa-solid fa-file-pdf"></i> Disponible en PDF</div>
+      <div class="plan21-num-bg">21</div>
+    </div>
+    <div class="plan21-text reveal" style="transition-delay:.12s">
+      <span class="plan21-eyebrow">¿Querés empezar ya mismo?</span>
+      <h2 class="plan21-h2">El plan que necesitás<br/><em>para arrancar hoy</em></h2>
+      <p class="plan21-p">Un plan de 21 días diseñado para instalar nuevos hábitos de forma progresiva. Lo comprás por WhatsApp, lo descargás al instante y empezás sin esperas.</p>
+      <div class="plan21-lista">
+        <div class="plan21-li"><i class="fa-solid fa-circle-check"></i>21 días de cambios de hábitos paso a paso</div>
+        <div class="plan21-li"><i class="fa-solid fa-circle-check"></i>Guía de alimentación incluida</div>
+        <div class="plan21-li"><i class="fa-solid fa-circle-check"></i>Actividad física adaptable a tu nivel</div>
+        <div class="plan21-li"><i class="fa-solid fa-circle-check"></i>Formato PDF — en tu celular en minutos</div>
+        <div class="plan21-li"><i class="fa-solid fa-circle-check"></i>Compra directa y consultas por WhatsApp</div>
+      </div>
+      <div class="plan21-ctas">
+        <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20comprar%20el%20Plan%2021%20D%C3%ADas" target="_blank" class="btn-wsp">
+          <i class="fa-brands fa-whatsapp"></i> Comprar por WhatsApp
+        </a>
+        <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20m%C3%A1s%20info%20del%20Plan%2021%20D%C3%ADas" target="_blank" class="btn-green">
+          Más información
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESO ══ -->
+<section id="proceso">
+  <div class="proceso-inner">
+    <div class="proceso-head reveal">
+      <span class="proceso-eyebrow">Cómo funciona</span>
+      <h2 class="proceso-h2">Empezar es más fácil<br/><em>de lo que pensás</em></h2>
+    </div>
+    <div class="proceso-steps reveal" style="transition-delay:.1s">
+      <div class="paso">
+        <div class="paso-circle">1</div>
+        <div>
+          <div class="paso-h3">Me escribís por WhatsApp</div>
+          <p class="paso-p">Contame tu objetivo y coordinamos. Sin formularios complicados.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <div class="paso-circle">2</div>
+        <div>
+          <div class="paso-h3">Hacemos la entrevista</div>
+          <p class="paso-p">Analizamos tu situación, hábitos y metas. Presencial u online.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <div class="paso-circle">3</div>
+        <div>
+          <div class="paso-h3">Recibís tu plan</div>
+          <p class="paso-p">Alimentación, recetarios y rutina 100% adaptados a vos.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <div class="paso-circle">4</div>
+        <div>
+          <div class="paso-h3">Seguimiento directo</div>
+          <p class="paso-p">Acceso a mí por WhatsApp para consultas, ajustes y resultados.</p>
+        </div>
+      </div>
+    </div>
+    <div class="proceso-cta reveal">
+      <p>¿Listo/a para arrancar? El primer paso es escribirme.</p>
+      <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20empezar%20con%20mi%20plan" target="_blank" class="btn-wsp">
+        <i class="fa-brands fa-whatsapp"></i> Escribime ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACTO / FORMULARIO ══ -->
+<section id="contacto">
+  <div class="contacto-inner">
+    <div class="ct-left reveal">
+      <span class="ct-eyebrow">¿Empezamos?</span>
+      <h2 class="ct-h2">Reservá tu turno<br/><em>hoy mismo</em></h2>
+      <p class="ct-p">Completá el formulario o escribime directamente. Respondo a la brevedad y coordinamos todo por WhatsApp.</p>
+      <div class="ct-datos">
+        <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20consultar" target="_blank" class="ct-dato" style="text-decoration:none;">
+          <div class="ct-dato-ico wsp"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="ct-dato-body">
+            <span class="ct-dato-lbl">WhatsApp</span>
+            <span class="ct-dato-val">+54 9 3534 11-6164</span>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/licnutri_yamibarrionuevo/" target="_blank" class="ct-dato" style="text-decoration:none;">
+          <div class="ct-dato-ico b"><i class="fa-brands fa-instagram"></i></div>
+          <div class="ct-dato-body">
+            <span class="ct-dato-lbl">Instagram</span>
+            <span class="ct-dato-val">@licnutri_yamibarrionuevo</span>
+          </div>
+        </a>
+        <div class="ct-dato">
+          <div class="ct-dato-ico g"><i class="fa-solid fa-video"></i></div>
+          <div class="ct-dato-body">
+            <span class="ct-dato-lbl">Modalidad</span>
+            <span class="ct-dato-val">Presencial y online</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20reservar%20mi%20turno" target="_blank" class="btn-wsp">
+        <i class="fa-brands fa-whatsapp"></i> Escribirme directamente
+      </a>
+    </div>
+    <div class="ct-form reveal" style="transition-delay:.12s">
+      <div class="form-title">Reservá tu turno</div>
+      <div class="form-sub">Completá el formulario — te llega directo a WhatsApp</div>
+      <div class="form-body">
+        <div class="form-row">
+          <div class="form-group"><label>Nombre</label><input type="text" id="f-nombre" placeholder="Tu nombre"/></div>
+          <div class="form-group"><label>WhatsApp</label><input type="text" id="f-tel" placeholder="Ej: 3534 123456"/></div>
+        </div>
+        <div class="form-group">
+          <label>¿Qué plan te interesa?</label>
+          <select id="f-servicio">
+            <option value="">— Seleccioná —</option>
+            <option>Plan Nutricional</option>
+            <option>Plan Descenso de Peso</option>
+            <option>Plan de Actividad Física</option>
+            <option>Plan 21 Días (PDF)</option>
+            <option>Plan Nutrición + Actividad Física</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>¿Cuál es tu objetivo?</label>
+          <textarea id="f-objetivo" placeholder="Contame qué querés lograr…"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Modalidad</label>
+          <select id="f-modalidad">
+            <option value="">— Seleccioná —</option>
+            <option>Presencial</option>
+            <option>Online</option>
+            <option>Me es indistinto</option>
+          </select>
+        </div>
+        <div class="form-note"><i class="fa-brands fa-whatsapp"></i> Al enviar se abre WhatsApp con tu consulta lista.</div>
+        <button class="btn-wsp btn-form" onclick="enviarWsp()">
+          <i class="fa-brands fa-whatsapp"></i> Enviar y reservar turno
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-inner">
+    <div class="f-top">
+      <div>
+        <div class="f-brand-row">
+          <img src="./logo.png" alt="Logo" class="f-logo"/>
+          <div class="f-name">Yamila Barrionuevo<span>Nutrición & Actividad Física</span></div>
+        </div>
+        <p class="f-desc">Planes personalizados de nutrición y actividad física para transformar tu salud de forma real y sostenible.</p>
+      </div>
+      <div class="f-col">
+        <span class="f-col-t">Planes</span>
+        <div class="f-links">
+          <a href="#solucion">Plan Descenso de Peso</a>
+          <a href="#solucion">Plan Nutricional</a>
+          <a href="#solucion">Plan Actividad Física</a>
+          <a href="#plan21">Plan 21 Días PDF</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <span class="f-col-t">Contacto</span>
+        <div class="f-contact-list">
+          <a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20consultar" target="_blank" class="f-contact-row" style="text-decoration:none;"><i class="fa-brands fa-whatsapp"></i><span>+54 9 3534 11-6164</span></a>
+          <a href="https://www.instagram.com/licnutri_yamibarrionuevo/" target="_blank" class="f-contact-row" style="text-decoration:none;"><i class="fa-brands fa-instagram"></i><span>@licnutri_yamibarrionuevo</span></a>
+          <div class="f-contact-row"><i class="fa-solid fa-id-card"></i><span>M.P. 4702</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="f-bot">
+      <p>© 2026 Lic. Yamila Barrionuevo. Todos los derechos reservados.</p>
+      <p>Desarrollado por <a href="https://www.instagram.com/sageedev/" target="_blank">@sageeDev</a></p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5493534116164?text=Hola%20Yamila%2C%20quiero%20consultar" target="_blank" class="wa" aria-label="WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script>
+  const hbg = document.getElementById('hamburger'), mnav = document.getElementById('mobile-nav'), ovl = document.getElementById('nav-overlay');
+  function toggleNav() {
+    const open = !mnav.classList.contains('open');
+    hbg.classList.toggle('open', open); mnav.classList.toggle('open', open); ovl.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  hbg.addEventListener('click', toggleNav); ovl.addEventListener('click', toggleNav);
+  document.querySelectorAll('#mobile-nav a').forEach(a => a.addEventListener('click', () => { if (mnav.classList.contains('open')) toggleNav(); }));
+
+  const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  function enviarWsp() {
+    const nombre = document.getElementById('f-nombre').value.trim();
+    const tel = document.getElementById('f-tel').value.trim();
+    const servicio = document.getElementById('f-servicio').value;
+    const objetivo = document.getElementById('f-objetivo').value.trim();
+    const modalidad = document.getElementById('f-modalidad').value;
+    if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
+    if (!servicio) { alert('Por favor seleccioná un plan.'); return; }
+    let msg = `Hola Yamila! Te escribo desde tu sitio web.%0A%0A`;
+    msg += `*Nombre:* ${encodeURIComponent(nombre)}%0A`;
+    if (tel) msg += `*WhatsApp:* ${encodeURIComponent(tel)}%0A`;
+    msg += `*Plan:* ${encodeURIComponent(servicio)}%0A`;
+    if (modalidad) msg += `*Modalidad:* ${encodeURIComponent(modalidad)}%0A`;
+    if (objetivo) msg += `*Objetivo:* ${encodeURIComponent(objetivo)}%0A`;
+    msg += `%0AQuedo a la espera. ¡Gracias!`;
+    window.open(`https://wa.me/5493534116164?text=${msg}`, '_blank');
+  }
+</script>
+</body>
+</html>
