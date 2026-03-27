@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-  <title>Lic. Yamila Barrionuevo - Bajá de peso de forma saludable</title>
+  <title>Bajá de peso de forma saludable — Lic. Yamila Barrionuevo</title>
   <meta name="description" content="Planes personalizados de nutrición y actividad física. Bajá de peso sin dietas extremas. Turnos online y presenciales. Reservá ahora."/>
   <link rel="icon" href="./logo.png" type="image/png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -323,6 +323,21 @@
     }
     .serv-cta:hover { gap: .8rem; }
     .serv-card.featured .serv-cta { color: var(--green-lt); }
+
+    /* ══ GALERÍA DE ALIMENTOS ══ */
+    #galeria { line-height: 0; overflow: hidden; }
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+    .galeria-item { overflow: hidden; aspect-ratio: 4/3; position: relative; }
+    .galeria-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease;
+      display: block;
+    }
+    .galeria-item:hover img { transform: scale(1.06); }
 
     /* ══════════════════════════════════════
        QUIÉN SOY — bloque de confianza
@@ -659,6 +674,8 @@
       .serv-li { justify-content: center; }
       .serv-cta { justify-content: center; }
 
+      .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+
       /* Quién */
       #quien { padding: 72px 5%; }
       .quien-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -898,12 +915,30 @@
   </div>
 </section>
 
+<!-- ══ GALERÍA DE ALIMENTOS ══ -->
+<section id="galeria">
+  <div class="galeria-grid">
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=90" alt="Alimentación saludable"/>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=90" alt="Frutas y verduras frescas"/>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=800&q=90" alt="Ingredientes naturales"/>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=800&q=90" alt="Bowl saludable"/>
+    </div>
+  </div>
+</section>
+
 <!-- ══ QUIÉN SOY ══ -->
 <section id="quien">
   <div class="quien-inner">
     <div class="quien-img-wrap reveal">
       <div class="quien-img-frame">
-        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=900&q=92" alt="Lic. Yamila Barrionuevo" class="quien-img"/>
+        <img src="./yamila.webp" alt="Lic. Yamila Barrionuevo" class="quien-img"/>
       </div>
       <div class="quien-badge">
         <div class="quien-badge-num">M.P.</div>
